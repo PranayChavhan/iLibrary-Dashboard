@@ -134,6 +134,31 @@ const _nav = [
       color: "info",
     },
   },
+
+
+
+  {
+    component: CNavTitle,
+    name: "E-Books",
+  },
+  {
+    component: CNavItem,
+    name: "Total EBooks",
+    to: "/total-ebooks",
+    icon: <CIcon icon={cilSchool} customClassName="nav-icon" />,
+    badge: {
+      color: "info",
+    },
+  },
+  {
+    component: CNavItem,
+    name: "Add Ebook",
+    to: "/add-ebook",
+    icon: <CIcon icon={cilAddressBook} customClassName="nav-icon" />,
+    badge: {
+      color: "info",
+    },
+  },
 ];
 
 export default _nav;

@@ -13,12 +13,12 @@ import {
   CRow,
 } from "@coreui/react";
 
-const Books = () => {
+const Totalebook = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/add")
+      .get("http://127.0.0.1:8000/api//addebook")
       .then(function (response) {
         console.log(response.data.books);
         setBooks(response.data.books);
@@ -41,7 +41,8 @@ const Books = () => {
                   <CTableHeaderCell scope="col">Book Name</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Author</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Category</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">No Of Boooks</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Size in MB</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Pages</CTableHeaderCell>
                   <CTableHeaderCell scope="col">View</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Edit</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Delete</CTableHeaderCell>
@@ -57,7 +58,6 @@ const Books = () => {
                       <CTableDataCell>{title}</CTableDataCell>
                       <CTableDataCell>{author}</CTableDataCell>
                       <CTableDataCell>{category}</CTableDataCell>
-                      <CTableDataCell>{noofbook}</CTableDataCell>
                       <CTableDataCell><CButton color="primary" disabled>View</CButton></CTableDataCell>
                       <CTableDataCell><CButton color="success">Edit</CButton></CTableDataCell>
                       <CTableDataCell><CButton color="danger">Delete</CButton></CTableDataCell>
@@ -75,4 +75,4 @@ const Books = () => {
   );
 };
 
-export default Books;
+export default Totalebook;
