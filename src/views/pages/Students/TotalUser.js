@@ -10,6 +10,7 @@ import {
   CTableHeaderCell,
   CTableBody,
   CTableDataCell,
+  CButton,
 } from "@coreui/react";
 const TotalUser = () => {
   const [userData, setUserData] = useState([]);
@@ -18,8 +19,8 @@ const TotalUser = () => {
     axios
       .get("http://127.0.0.1:8000/api/addUser")
       .then(function (response) {
-        console.log(response.data.books);
-        setUserData(response.data.books);
+        console.log(response.data.students);
+        setUserData(response.data.students);
       })
       .catch(function (error) {
         console.log(error);

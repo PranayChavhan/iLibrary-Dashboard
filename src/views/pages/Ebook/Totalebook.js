@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
+
+import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
 import axios from "axios";
+
 import {
   CTable,
   CTableHead,
@@ -11,17 +14,43 @@ import {
   CButton,
   CCol,
   CRow,
+  CLink,
+  CImage,
 } from "@coreui/react";
 
 const Totalebook = () => {
   const [books, setBooks] = useState([]);
 
+  // ==============================
+
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+    setPageNumber(1);
+  }
+
+  function changePage(offSet) {
+    setPageNumber((prevPageNumber) => prevPageNumber + offSet);
+  }
+
+  function changePageBack() {
+    changePage(-1);
+  }
+
+  function changePageNext() {
+    changePage(+1);
+  }
+
+  // ======================
+
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api//addebook")
+      .get("http://127.0.0.1:8000/api/addebook")
       .then(function (response) {
-        console.log(response.data.books);
-        setBooks(response.data.books);
+        console.log(response.data.ebooks);
+        setBooks(response.data.ebooks);
       })
       .catch(function (error) {
         console.log(error);
@@ -49,22 +78,39 @@ const Totalebook = () => {
                 </CTableRow>
               </CTableHead>
               {books.map((element) => {
-                const { title, author, category, noofbook, id, image } = element;
+                const { title, author, category, size, pages, id, image } =
+                  element;
                 return (
                   <CTableBody>
                     <CTableRow key={id}>
                       <CTableHeaderCell scope="row">{id}</CTableHeaderCell>
-                      <CTableDataCell><img src="  " alt="bopok-image" /></CTableDataCell>
+
+                      <CTableDataCell>
+                        <div>
+                          <embed
+                            src={image}
+                            width="100"
+                            height="120"
+                            type="application/pdf"
+                          />
+                        </div>
+                      </CTableDataCell>
                       <CTableDataCell>{title}</CTableDataCell>
                       <CTableDataCell>{author}</CTableDataCell>
                       <CTableDataCell>{category}</CTableDataCell>
-                      <CTableDataCell><CButton color="primary" disabled>View</CButton></CTableDataCell>
-                      <CTableDataCell><CButton color="success">Edit</CButton></CTableDataCell>
-                      <CTableDataCell><CButton color="danger">Delete</CButton></CTableDataCell>
+                      <CTableDataCell>{size}</CTableDataCell>
+                      <CTableDataCell>{pages}</CTableDataCell>
+                      <CTableDataCell>
+                        <CButton color="primary">View</CButton>
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        <CButton color="success">Edit</CButton>
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        <CButton color="danger">Delete</CButton>
+                      </CTableDataCell>
                     </CTableRow>
                   </CTableBody>
-                
-                  
                 );
               })}
             </CTable>

@@ -48,23 +48,37 @@ const Books = () => {
                 </CTableRow>
               </CTableHead>
               {books.map((element) => {
-                const { title, author, category, noofbook, id, image } = element;
+                const { title, author, category, noofbook, id, image } =
+                  element;
                 return (
                   <CTableBody>
                     <CTableRow key={id}>
                       <CTableHeaderCell scope="row">{id}</CTableHeaderCell>
-                      <CTableDataCell><img src="  " alt="bopok-image" /></CTableDataCell>
+                      <CTableDataCell>
+                        <img
+                          src={image}
+                          width="70"
+                          style={{ border: "1px solid gray", borderRadius: "5px" }}
+                          alt="bopok-image"
+                        />
+                      </CTableDataCell>
                       <CTableDataCell>{title}</CTableDataCell>
                       <CTableDataCell>{author}</CTableDataCell>
                       <CTableDataCell>{category}</CTableDataCell>
                       <CTableDataCell>{noofbook}</CTableDataCell>
-                      <CTableDataCell><CButton color="primary" disabled>View</CButton></CTableDataCell>
-                      <CTableDataCell><CButton color="success">Edit</CButton></CTableDataCell>
-                      <CTableDataCell><CButton color="danger">Delete</CButton></CTableDataCell>
+                      <CTableDataCell>
+                        <CButton color="primary" disabled>
+                          View
+                        </CButton>
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        <CButton color="success">Edit</CButton>
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        <CButton color="danger">Delete</CButton>
+                      </CTableDataCell>
                     </CTableRow>
                   </CTableBody>
-                
-                  
                 );
               })}
             </CTable>

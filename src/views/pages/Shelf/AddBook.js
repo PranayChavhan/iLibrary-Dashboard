@@ -39,26 +39,28 @@ const AddBook = () => {
     axios
       .post(baseURL, formData)
       .then((res) => {
-        alert("File Upload success");
+
+        swal({
+          title: "Good job!",
+          text: "Book added successfully",
+          icon: "success",
+          button: {
+            text:"Done",
+          },
+        })
+
       })
       .catch((err) => alert("File Upload Error"));
   
 
-    swal({
-      title: "Good job!",
-      text: "Book added successfully",
-      icon: "success",
-      button: {
-        text:"Done",
-      },
-    })
+    
 
-    setTitle("");
-    setAuthor("");
-    setDescription("");
-    setCategory("");
-    setNoofbook("");
-    setBookImg("");
+    // setTitle("");
+    // setAuthor("");
+    // setDescription("");
+    // setCategory("");
+    // setNoofbook("");
+    // setBookImg("");
   };
 
   return (

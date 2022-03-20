@@ -23,7 +23,7 @@ const Addebook = () => {
   const [pages, setPages] = useState("");
   const [bookImg, setBookImg] = useState("");
 
-  const baseURL = "http://127.0.0.1:8000/api//addebook";
+  const baseURL = "http://127.0.0.1:8000/api/addebook";
 
   const handleSubmit = (e) => {
     e.preventDefault()

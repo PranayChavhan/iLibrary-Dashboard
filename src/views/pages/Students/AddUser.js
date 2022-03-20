@@ -17,6 +17,7 @@ const AddUser = () => {
     const [name, setName] = useState("");
     const [enroll, setEnroll] = useState("");
     const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("Pass@123")
     const [contact, setContact] = useState("");
     const [address, setAddress] = useState("");
     const [department, setDepartment] = useState("");
@@ -33,6 +34,7 @@ const AddUser = () => {
       formData.append("name", name);
       formData.append("enrollment", enroll);
       formData.append("email",email);
+      formData.append("password",password);
       formData.append("contact", contact);
       formData.append("address", address);
       formData.append("department", department);
@@ -80,7 +82,7 @@ const AddUser = () => {
                   }}
                   type="text"
                   id="exampleFormControlInput1"
-                  placeholder="Book Name"
+                  placeholder="Student Name"
                 />
               </div>
               <div className="mb-3">
@@ -94,7 +96,7 @@ const AddUser = () => {
                 }}
                   type="text"
                   id="exampleFormControlInput1"
-                  placeholder="Author name"
+                  placeholder="Enrollment Number"
                 />
               </div>
 
@@ -111,6 +113,25 @@ const AddUser = () => {
                   id="exampleFormControlTextarea1"
                 />
               </div>
+
+
+
+              <div className="mb-3">
+                <CFormLabel htmlFor="exampleFormControlTextarea1">
+                  Password
+                </CFormLabel>
+                <CFormInput
+                type = "password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                  id="exampleFormControlTextarea1"
+                />
+              </div>
+
+
+
               <div className="mb-3">
                 <CFormLabel htmlFor="exampleFormControlTextarea1">
                   Contact

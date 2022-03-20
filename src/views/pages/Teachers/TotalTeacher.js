@@ -10,6 +10,7 @@ import {
   CTableHeaderCell,
   CTableBody,
   CTableDataCell,
+  CButton,
 } from "@coreui/react";
 
 const TotalTeacher = () => {

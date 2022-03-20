@@ -50,8 +50,8 @@ const routes = [
   { path: "/add-teachers", name: "AddTeacher", component: AddTeacher },
   { path: "/total-resources", name: "TotalTeacher", component: TotalResource },
   { path: "/add-resources", name: "AddTeacher", component: AddResource },
-  { path: "/total-ebooks", name: "TotalTeacher", component: Totalebook },
-  { path: "/add-ebook", name: "AddTeacher", component: Addebook },
+  { path: "/total-ebooks", name: "Addebook", component: Totalebook },
+  { path: "/add-ebook", name: "Addebook", component: Addebook },
 ];
 
 export default routes;
