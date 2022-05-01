@@ -44,7 +44,7 @@ const AddUser = () => {
       axios
         .post(baseURL, formData)
         .then((res) => {
-          alert("File Upload success");
+         
         })
         .catch((err) => alert("File Upload Error"));
     
@@ -57,12 +57,6 @@ const AddUser = () => {
           text:"Done",
         },
       })
-  
-    //   setTitle("");
-    //   setAuthor("");
-    //   setDescription("");
-    //   setCategory("");
-    //   setBookImg("");
     };
   return (
     <div>

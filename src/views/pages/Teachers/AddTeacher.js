@@ -15,34 +15,29 @@ import axios from "axios";
 
 const AddTeacher = () => {
     const [name, setName] = useState("");
-    const [enroll, setEnroll] = useState("");
-    const [email, setEmail] = useState("");
+    const [teacher_id, setTeacher_id] = useState("");
+    const [password, setPassword] = useState("Pass@123");
     const [contact, setContact] = useState("");
     const [address, setAddress] = useState("");
     const [department, setDepartment] = useState("");
-    const [year, setYear] = useState("");
-    
-    const [userImg, setUserImg] = useState("");
+    const [teacherImg, setTeacherImg] = useState("");
   
-    const baseURL = "http://127.0.0.1:8000/api/addUser";
+    const baseURL = "http://127.0.0.1:8000/api/teachers";
   
     const handleSubmit = (e) => {
       e.preventDefault()
   
       const formData = new FormData();
       formData.append("name", name);
-      formData.append("enrollment", enroll);
-      formData.append("email",email);
+      formData.append("teacher_id", teacher_id);
       formData.append("contact", contact);
       formData.append("address", address);
       formData.append("department", department);
-      formData.append("year", year);
-      formData.append("userImg", userImg);
+      formData.append("teacherImg", teacherImg);
     
       axios
         .post(baseURL, formData)
         .then((res) => {
-          alert("File Upload success");
         })
         .catch((err) => alert("File Upload Error"));
     
@@ -90,9 +85,9 @@ const AddTeacher = () => {
                 Teacher's ID
                 </CFormLabel>
                 <CFormInput
-                value={enroll}
+                value={teacher_id}
                 onChange={(e) => {
-                  setEnroll(e.target.value);
+                  setTeacher_id(e.target.value);
                 }}
                   type="text"
                   id="exampleFormControlInput1"
@@ -102,13 +97,13 @@ const AddTeacher = () => {
 
               <div className="mb-3">
                 <CFormLabel htmlFor="exampleFormControlTextarea1">
-                  Email
+                  Password
                 </CFormLabel>
                 <CFormInput
-                type = "email"
-                value={email}
+                type = "password"
+                value={password}
                 onChange={(e) => {
-                  setEmail(e.target.value);
+                  setPassword(e.target.value);
                 }}
                   id="exampleFormControlTextarea1"
                 />
@@ -155,7 +150,7 @@ const AddTeacher = () => {
                 <CFormLabel htmlFor="formFile">Upload Image</CFormLabel>
                 <CFormInput 
                 onChange={(e) => {
-                  setUserImg(e.target.files[0]);
+                  setTeacherImg(e.target.files[0]);
                 }}
                 type="file" id="formFile" />
               </div>

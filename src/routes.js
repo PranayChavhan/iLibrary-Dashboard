@@ -36,8 +36,11 @@ const Totalebook = React.lazy(() => import("./views/pages/Ebook/Totalebook"));
 
 const Addebook = React.lazy(() => import("./views/pages/Ebook/Addebook"));
 
+const LoginPage = React.lazy(() => import("./views/pages/LoginPage"));
+
 const routes = [
   { path: "/", exact: true, name: "Home" },
+  // { path: "/login", name: "LoginPage", component: LoginPage },
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
   { path: "/widgets", name: "Widgets", component: Widgets },
   { path: "/books", name: "Books", component: Books },

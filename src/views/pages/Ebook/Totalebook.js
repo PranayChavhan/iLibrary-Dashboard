@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-
-import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
 import axios from "axios";
 
 import {
@@ -14,36 +12,10 @@ import {
   CButton,
   CCol,
   CRow,
-  CLink,
-  CImage,
 } from "@coreui/react";
 
 const Totalebook = () => {
   const [books, setBooks] = useState([]);
-
-  // ==============================
-
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
-
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-    setPageNumber(1);
-  }
-
-  function changePage(offSet) {
-    setPageNumber((prevPageNumber) => prevPageNumber + offSet);
-  }
-
-  function changePageBack() {
-    changePage(-1);
-  }
-
-  function changePageNext() {
-    changePage(+1);
-  }
-
-  // ======================
 
   useEffect(() => {
     axios

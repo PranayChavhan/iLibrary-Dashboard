@@ -35,6 +35,10 @@ const AddBook = () => {
     formData.append("category", category);
     formData.append("noofbook", noofbook);
     formData.append("image", bookImg);
+
+    console.log('====================================');
+    console.log(formData);
+    console.log('====================================');
   
     axios
       .post(baseURL, formData)
@@ -118,9 +122,26 @@ const AddBook = () => {
                 onChange={((e)=>{setCategory(e.target.value)})}
                 aria-label="Default select example">
                   <option>Categories of Book</option>
+                  <option value="Operating System" >Operating System</option>
+                  <option value="Java Programming" >Java Programming</option>
+                  <option value="c/c++ Programming" >c/c++ Programming</option>
+                  <option value="Python Programming" >Python Programming</option>
+                  <option value="Object Oriented Programming" >Object Oriented Programming</option>
+                  <option value="Software Testing" >Software Testing</option>
+                  <option value="Data Structure" >Data Structure</option>
+                  <option value="Engineering Graphics" >Engineering Graphics</option>
+                  <option value="Networking" >Networking</option>
+                  <option value="RDBMS" >RDBMS</option>
+                  <option value="Computer Security" >Computer Security</option>
+                  <option value="Web Development" >Web Development</option>
+                  <option value="Electronics" >Electronics</option>
+                  <option value="Mechanics" >Mechanics</option>
+                  <option value="Chemistry" >Chemistry</option>
+                  <option value="Mathematics" >Mathematics</option>
                   <option value="First Year" >First Year</option>
                   <option value="Second Year" >Second Year</option>
                   <option value="Third Year" >Third Year</option>
+                  
                 </CFormSelect>
               </div>
               <div className="mb-3 mt-3">
