@@ -14,11 +14,14 @@ import {
 } from "@coreui/react";
 
 const TotalTeacher = () => {
+  const apiKey = process.env.REACT_APP_NEWS_API;
+
+
   const [teacherData, setTeacherData] = useState([]);
 
-  useEffect(() => {
+  const loadStudent = async () => {
     axios
-      .get("http://127.0.0.1:8000/api/teachers")
+      .get(`${apiKey}/api/teachers`)
       .then(function (response) {
         console.log(response.data.teachers);
         setTeacherData(response.data.teachers);
@@ -26,7 +29,39 @@ const TotalTeacher = () => {
       .catch(function (error) {
         console.log(error);
       });
+  };
+
+  useEffect(() => {
+    
+    loadStudent();
   }, []);
+
+
+  const handleDelete = (id) =>{
+    console.log('====================================');
+    console.log(id);
+    console.log('====================================');
+  
+    axios
+    .delete(`${apiKey}/api/teacher/${id}`)
+    .then(function() {
+      swal({
+        title: "Good job!",
+        text: "Book deleted successfully",
+        icon: "success",
+        button: {
+          text:"Ok",
+        },
+      });
+      loadStudent();
+      
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  
+  }
+
 
   return (
     <div>
@@ -69,7 +104,7 @@ const TotalTeacher = () => {
                         <CButton color="success">Edit</CButton>
                       </CTableDataCell>
                       <CTableDataCell>
-                        <CButton color="danger">Delete</CButton>
+                        <CButton onClick={((e)=>{handleDelete(id)})} color="danger">Delete</CButton>
                       </CTableDataCell>
                     </CTableRow>
                   </CTableBody>

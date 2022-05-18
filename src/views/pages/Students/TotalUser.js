@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import axios from "axios";
 import {
   CCard,
@@ -13,31 +14,73 @@ import {
   CButton,
 } from "@coreui/react";
 const TotalUser = () => {
+  const apiKey = process.env.REACT_APP_NEWS_API;
+
+
   const [userData, setUserData] = useState([]);
+  
+  const loadStudent = async () => {
+    axios
+    .get(`${apiKey}/api/addUser`)
+    .then(function (response) {
+      console.log(response.data.students);
+      setUserData(response.data.students);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  };
 
   useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8000/api/addUser")
-      .then(function (response) {
-        console.log(response.data.students);
-        setUserData(response.data.students);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    
+    loadStudent();
   }, []);
+
+
+  const handleDelete = (id) =>{
+    console.log('====================================');
+    console.log(id);
+    console.log('====================================');
+  
+    axios
+    .delete(`${apiKey}/api/student/${id}`)
+    .then(function() {
+      swal({
+        title: "Good job!",
+        text: "Book deleted successfully",
+        icon: "success",
+        button: {
+          text:"Ok",
+        },
+      });
+      loadStudent();
+      
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  
+  }
 
   return (
     <div>
+       <ReactHTMLTableToExcel
+        id="test-table-xls-button"
+        className="btn btn-primary mb-2"
+        table="table-to-xls"
+        filename="Student"
+        sheet="tablexls"
+        buttonText="Download as XLS"
+      />
       <CRow>
         <CCol xs>
           <CCard className="mb-4">
-            <CTable hover>
+            <CTable hover id="table-to-xls">
               <CTableHead>
                 <CTableRow color="primary">
-                  <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Student Name</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Enrollment No</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">SrNo</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">StudentName</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">EnrollmentNo</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Email</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Contact</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Address</CTableHeaderCell>
@@ -73,7 +116,7 @@ const TotalUser = () => {
                       <CTableDataCell>{year}</CTableDataCell>
                       <CTableDataCell><CButton color="primary" disabled>View</CButton></CTableDataCell>
                       <CTableDataCell><CButton color="success">Edit</CButton></CTableDataCell>
-                      <CTableDataCell><CButton color="danger">Delete</CButton></CTableDataCell>
+                      <CTableDataCell><CButton onClick={((e)=>{handleDelete(id)})} color="danger">Delete</CButton></CTableDataCell>
                     </CTableRow>
                   </CTableBody>
                 );

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
   CRow,
   CCol,
@@ -14,6 +15,50 @@ import CIcon from '@coreui/icons-react'
 import { cilArrowBottom, cilArrowTop, cilOptions } from '@coreui/icons'
 
 const WidgetsDropdown = () => {
+  const apiKey = process.env.REACT_APP_NEWS_API;
+  const [books, setBooks] = useState([]);
+  const [userData, setUserData] = useState([]);
+  const [Issuedbooks, setIssuedBooks] = useState([]);
+
+
+  useEffect(() => {
+    loadBook();
+    loadStudent();
+    loadIssuedBook();
+  }, []);
+
+  const loadBook = async () => {
+    axios
+      .get(`${apiKey}/api/add`)
+      .then(function (response) {
+        setBooks(response.data.books.length);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  
+  const loadStudent = async () => {
+    axios
+    .get(`${apiKey}/api/addUser`)
+    .then(function (response) {
+      setUserData(response.data.students.length);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  };
+  const loadIssuedBook = async () => {
+    axios
+    .get(`${apiKey}/api/allissuedbook`)
+    .then(function (response) {
+      setIssuedBooks(response.data.issuedbook.length);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  };
+
   return (
     <CRow>
       <CCol sm={6} lg={3}>
@@ -22,10 +67,7 @@ const WidgetsDropdown = () => {
           color="primary"
           value={
             <>
-              26K{' '}
-              <span className="fs-6 fw-normal">
-                (-12.4% <CIcon icon={cilArrowBottom} />)
-              </span>
+              {userData}
             </>
           }
           title="Users"
@@ -109,10 +151,8 @@ const WidgetsDropdown = () => {
           color="info"
           value={
             <>
-              $6.200{' '}
-              <span className="fs-6 fw-normal">
-                (40.9% <CIcon icon={cilArrowTop} />)
-              </span>
+              {books}
+
             </>
           }
           title="Books"
@@ -195,10 +235,8 @@ const WidgetsDropdown = () => {
           color="warning"
           value={
             <>
-              2.49{' '}
-              <span className="fs-6 fw-normal">
-                (84.7% <CIcon icon={cilArrowTop} />)
-              </span>
+              {Issuedbooks}
+             
             </>
           }
           title="Registered books"
@@ -269,9 +307,7 @@ const WidgetsDropdown = () => {
           value={
             <>
               44K{' '}
-              <span className="fs-6 fw-normal">
-                (-23.6% <CIcon icon={cilArrowBottom} />)
-              </span>
+              
             </>
           }
           title="Wainting list"

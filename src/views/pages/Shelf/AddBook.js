@@ -15,6 +15,8 @@ import axios from "axios";
 
 
 const AddBook = () => {
+  const apiKey = process.env.REACT_APP_NEWS_API;
+
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [description, setDescription] = useState("");
@@ -23,7 +25,7 @@ const AddBook = () => {
   
   const [bookImg, setBookImg] = useState("");
 
-  const baseURL = "http://127.0.0.1:8000/api/add";
+  const baseURL = `${apiKey}/api/add`;
 
   const handleSubmit = (e) => {
     e.preventDefault()

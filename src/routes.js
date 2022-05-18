@@ -1,4 +1,5 @@
 import React from "react";
+import Demo from "./views/pages/Students/demo";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 
@@ -38,9 +39,11 @@ const Addebook = React.lazy(() => import("./views/pages/Ebook/Addebook"));
 
 const LoginPage = React.lazy(() => import("./views/pages/LoginPage"));
 
+const EditBook = React.lazy(() => import("./views/pages/Shelf/EditBook"));
+
 const routes = [
   { path: "/", exact: true, name: "Home" },
-  // { path: "/login", name: "LoginPage", component: LoginPage },
+  { path: "/login", name: "LoginPage", component: LoginPage },
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
   { path: "/widgets", name: "Widgets", component: Widgets },
   { path: "/books", name: "Books", component: Books },
@@ -55,6 +58,10 @@ const routes = [
   { path: "/add-resources", name: "AddTeacher", component: AddResource },
   { path: "/total-ebooks", name: "Addebook", component: Totalebook },
   { path: "/add-ebook", name: "Addebook", component: Addebook },
+  { path: "/:name", name: "Editbook", component: EditBook },
+  { path: "/demo", name: "Demo", component: Demo },
+
+
 ];
 
 export default routes;

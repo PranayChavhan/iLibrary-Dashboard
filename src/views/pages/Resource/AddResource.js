@@ -16,11 +16,13 @@ import axios from "axios";
 
 
 const AddResource = () => {
+  const apiKey = process.env.REACT_APP_NEWS_API;
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [img, setImg] = useState("");
 
-  const baseURL = "http://127.0.0.1:8000/api/resources";
+  const baseURL = `${apiKey}/api/resources`;
 
   const handleSubmit = (e) => {
     e.preventDefault()

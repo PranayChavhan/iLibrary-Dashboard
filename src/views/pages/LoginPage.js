@@ -13,6 +13,9 @@ import {
 } from "@coreui/react";
 
 const LoginPage = () => {
+  const apiKey = process.env.REACT_APP_NEWS_API;
+
+
     let history = useHistory();
 
   useEffect(() => {
@@ -27,7 +30,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const baseURL = "http://127.0.0.1:8000/api/loginAdmin";
+  const baseURL = `${apiKey}/api/loginAdmin`;
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import axios from "axios";
 import {
   CTable,
@@ -14,13 +15,14 @@ import {
 } from "@coreui/react";
 
 const IssuedBook = () => {
+  const apiKey = process.env.REACT_APP_NEWS_API;
+
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/allissuedbook")
+      .get(`${apiKey}/api/allissuedbook`)
       .then(function (response) {
-        // console.log(response.data.issuedbook);
         setBooks(response.data.issuedbook);
       })
       .catch(function (error) {
@@ -41,12 +43,8 @@ const IssuedBook = () => {
       id: id
     };
 
-    // console.log("==aaaaaaaaaaaa==================================");
-    // console.log(article);
-    // console.log("====================================");
-
     axios
-      .post(`http://127.0.0.1:8000/api/issuedbook/${id}`, article)
+      .post(`${apiKey}/api/issuedbook/${id}`, article)
       .then((res) => {
         
         swal({
@@ -63,10 +61,18 @@ const IssuedBook = () => {
 
   return (
     <div>
+      <ReactHTMLTableToExcel
+        id="test-table-xls-button"
+        className="btn btn-primary mb-2"
+        table="table-to-xls"
+        filename="Students"
+        sheet="tablexls"
+        buttonText="Download as XLS"
+      />
       <CRow>
         <CCol xs>
           <CCard className="mb-4">
-            <CTable hover>
+            <CTable hover id="table-to-xls">
               <CTableHead>
                 <CTableRow color="primary">
                   <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>

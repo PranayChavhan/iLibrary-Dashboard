@@ -15,10 +15,11 @@ import {
 
 const TotalResource = () => {
   const [books, setBooks] = useState([]);
+  const apiKey = process.env.REACT_APP_NEWS_API;
 
-  useEffect(() => {
+  const loadStudent = async () => {
     axios
-      .get("http://127.0.0.1:8000/api/resources")
+      .get(`${apiKey}/api/resources`)
       .then(function (response) {
         console.log(response.data.resources);
         setBooks(response.data.resources);
@@ -26,7 +27,37 @@ const TotalResource = () => {
       .catch(function (error) {
         console.log(error);
       });
+  };
+
+  useEffect(() => {
+    
+    loadStudent();
   }, []);
+
+
+  const handleDelete = (id) =>{
+    console.log('====================================');
+    console.log(id);
+    console.log('====================================');
+    
+    axios
+    .delete(`${apiKey}/api/resources/${id}`)
+    .then(function() {
+      swal({
+        title: "Good job!",
+        text: "Book deleted successfully",
+        icon: "success",
+        button: {
+          text:"Ok",
+        },
+      });
+      loadStudent();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
 
   return (
     <div>
@@ -72,7 +103,7 @@ const TotalResource = () => {
                         <CButton color="success">Edit</CButton>
                       </CTableDataCell>
                       <CTableDataCell>
-                        <CButton color="danger">Delete</CButton>
+                        <CButton onClick={((e)=>{handleDelete(id)})} color="danger">Delete</CButton>
                       </CTableDataCell>
                     </CTableRow>
                   </CTableBody>

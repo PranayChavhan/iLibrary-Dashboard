@@ -14,6 +14,9 @@ import swal from 'sweetalert';
 import axios from "axios";
 
 const AddTeacher = () => {
+  const apiKey = process.env.REACT_APP_NEWS_API;
+
+
     const [name, setName] = useState("");
     const [teacher_id, setTeacher_id] = useState("");
     const [password, setPassword] = useState("Pass@123");
@@ -22,7 +25,7 @@ const AddTeacher = () => {
     const [department, setDepartment] = useState("");
     const [teacherImg, setTeacherImg] = useState("");
   
-    const baseURL = "http://127.0.0.1:8000/api/teachers";
+    const baseURL = `${apiKey}/api/teachers`;
   
     const handleSubmit = (e) => {
       e.preventDefault()
