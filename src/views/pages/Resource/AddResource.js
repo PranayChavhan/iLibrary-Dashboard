@@ -42,7 +42,7 @@ const AddResource = () => {
 
         swal({
           title: "Good job!",
-          text: "Book added successfully",
+          text: "Resource added successfully",
           icon: "success",
           button: {
             text:"Done",

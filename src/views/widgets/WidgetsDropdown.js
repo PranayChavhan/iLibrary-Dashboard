@@ -16,10 +16,10 @@ import { cilArrowBottom, cilArrowTop, cilOptions } from '@coreui/icons'
 
 const WidgetsDropdown = () => {
   const apiKey = process.env.REACT_APP_NEWS_API;
-  const [books, setBooks] = useState([]);
-  const [userData, setUserData] = useState([]);
-  const [Issuedbooks, setIssuedBooks] = useState([]);
-
+  const [books, setBooks] = useState(0);
+  const [userData, setUserData] = useState(0);
+  const [Issuedbooks, setIssuedBooks] = useState(0);
+  const [waitingList, setWaitingList] = useState(0);
 
   useEffect(() => {
     loadBook();
@@ -239,7 +239,7 @@ const WidgetsDropdown = () => {
              
             </>
           }
-          title="Registered books"
+          title="Issued books"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle color="transparent" caret={false} className="p-0">
@@ -306,7 +306,7 @@ const WidgetsDropdown = () => {
           color="danger"
           value={
             <>
-              44K{' '}
+             {Issuedbooks}
               
             </>
           }

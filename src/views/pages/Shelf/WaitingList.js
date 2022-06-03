@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
-    CTable,
-    CTableHead,
-    CTableRow,
-    CTableHeaderCell,
-    CTableBody,
-    CTableDataCell,
-    CCard,
-    CCol,
-    CRow,
-    CButton
-  } from "@coreui/react";
+  CTable,
+  CTableHead,
+  CTableRow,
+  CTableHeaderCell,
+  CTableBody,
+  CTableDataCell,
+  CCard,
+  CCol,
+  CRow,
+  CButton,
+} from "@coreui/react";
 
 const WaitingList = () => {
   const apiKey = process.env.REACT_APP_NEWS_API;
@@ -19,6 +19,9 @@ const WaitingList = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
+    loadBook();
+  }, []);
+  const loadBook = async () => {
     axios
       .get(`${apiKey}/api/allissuedbook`)
       .then(function (response) {
@@ -27,26 +30,34 @@ const WaitingList = () => {
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  };
 
-  
-  function removeItem(title, author, category, userEmail, userEnrollment, userName, status, image, id) {
+  function removeItem(
+    title,
+    author,
+    category,
+    userEmail,
+    userEnrollment,
+    userName,
+    status,
+    image,
+    id
+  ) {
     const article = {
       title: title,
-      author:author,
+      author: author,
       category: category,
       userEmail: userEmail,
       userEnrollment: userEnrollment,
       userName: userName,
       status: "Issued",
       image: image,
-      id: id
+      id: id,
     };
 
     axios
       .post(`${apiKey}/api/issuedbook/${id}`, article)
       .then((res) => {
-        
         swal({
           title: "Good job!",
           text: "Book added to wishlist successfully",
@@ -55,13 +66,31 @@ const WaitingList = () => {
             text: "Done",
           },
         });
+        loadBook();
+      })
+      .catch((err) => alert(err));
+  }
+
+  function removeBook(id) {
+    axios
+      .delete(`${apiKey}/api/bookkk/${id}`)
+      .then((res) => {
+        swal({
+          title: "Good job!",
+          text: "Book Accepted successfully",
+          icon: "success",
+          button: {
+            text: "Done",
+          },
+        });
+        loadBook();
       })
       .catch((err) => alert(err));
   }
 
   return (
     <div>
-        <CRow>
+      <CRow>
         <CCol xs>
           <CCard className="mb-4">
             <CTable hover id="table-to-xls">
@@ -90,33 +119,61 @@ const WaitingList = () => {
                     updated_at,
                     image,
                     id,
-                    status
+                    status,
                   } = element;
                   return (
-                    <CTableRow>
-                      <CTableHeaderCell scope="row">{id}</CTableHeaderCell>
-                      <CTableDataCell>{userName}</CTableDataCell>
-                      <CTableDataCell>{userEnrollment}</CTableDataCell>
-                      <CTableDataCell>2rd Year</CTableDataCell>
-                      <CTableDataCell>{updated_at.slice(0, 10)}</CTableDataCell>
-                      <CTableDataCell>{title}</CTableDataCell>
-                      <CTableDataCell>{category}</CTableDataCell>
-                      <CTableDataCell>
-                        <CButton
-                          onClick={(e) => {
-                            e.preventDefault();
-                            removeItem( title, author, category, userEmail, userEnrollment, userName, status, image, id);
-                          }}
-                          color="success"
-                          type="sumbit"
-                        >
-                          Accept
-                        </CButton>
-                      </CTableDataCell>
-                      <CTableDataCell>
-                        <CButton color="danger">Reject</CButton>
-                      </CTableDataCell>
-                    </CTableRow>
+                    <>
+                      {status === "Waiting" ? (
+                        <>
+                          <CTableRow>
+                            <CTableHeaderCell scope="row">
+                              {id}
+                            </CTableHeaderCell>
+                            <CTableDataCell>{userName}</CTableDataCell>
+                            <CTableDataCell>{userEnrollment}</CTableDataCell>
+                            <CTableDataCell>2rd Year</CTableDataCell>
+                            <CTableDataCell>
+                              {updated_at.slice(0, 10)}
+                            </CTableDataCell>
+                            <CTableDataCell>{title}</CTableDataCell>
+                            <CTableDataCell>{category}</CTableDataCell>
+                            <CTableDataCell>
+                              <CButton
+                                onClick={(e) => {
+                                 
+                                  removeItem(
+                                    title,
+                                    author,
+                                    category,
+                                    userEmail,
+                                    userEnrollment,
+                                    userName,
+                                    status,
+                                    image,
+                                    id
+                                  );
+                                }}
+                                color="success"
+                                type="sumbit"
+                              >
+                                Accept
+                              </CButton>
+                            </CTableDataCell>
+                            <CTableDataCell>
+                              <CButton
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  removeBook(id);
+                                }}
+                                color="danger"
+                              >
+                                Reject
+                              </CButton>
+                            </CTableDataCell>
+                          </CTableRow>
+                        </>
+                      ) : null}
+                    </>
                   );
                 })}
               </CTableBody>
@@ -125,7 +182,7 @@ const WaitingList = () => {
         </CCol>
       </CRow>
     </div>
-  )
-}
+  );
+};
 
-export default WaitingList
+export default WaitingList;

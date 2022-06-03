@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
 import {
   CTable,
   CTableHead,
@@ -15,28 +13,22 @@ import {
   CRow,
 } from "@coreui/react";
 
-const Books = () => {
-  const apiKey = process.env.REACT_APP_NEWS_API;
-
-  let navigate = useHistory();
+const IssuedResource = () => {
   const [books, setBooks] = useState([]);
+  const apiKey = process.env.REACT_APP_NEWS_API;
 
   const loadStudent = async () => {
     axios
-      .get(`${apiKey}/api/add`)
+      .get(`${apiKey}/api/issueresourses`)
       .then(function (response) {
-        console.log(response.data.books);
-        setBooks(response.data.books);
+        console.log(response.data.iissuedresources);
+        setBooks(response.data.iissuedresources);
       })
       .catch(function (error) {
         console.log(error);
       });
   };
- 
 
-  console.log('==========uhuhauauaunauauna==========================');
-  console.log(books.length);
-  console.log('====================================');
   useEffect(() => {
     loadStudent();
   }, []);
@@ -47,11 +39,11 @@ const Books = () => {
     console.log("====================================");
 
     axios
-      .delete(`${apiKey}/api/book/${id}`)
+      .delete(`${apiKey}/api/issueresourses/${id}`)
       .then(function () {
         swal({
           title: "Good job!",
-          text: "Book deleted successfully",
+          text: "Accepted successfully",
           icon: "success",
           button: {
             text: "Ok",
@@ -64,40 +56,27 @@ const Books = () => {
       });
   };
 
-  const handleEdit = (title) => {
-    navigate.push(`/${title}`);
-  };
-
   return (
     <div>
-      <ReactHTMLTableToExcel
-        id="test-table-xls-button"
-        className="btn btn-primary mb-2"
-        table="table-to-xls"
-        filename="Book"
-        sheet="tablexls"
-        buttonText="Download as XLS"
-      />
       <CRow>
         <CCol xs>
           <CCard className="mb-4">
-            <CTable hover id="table-to-xls">
+            <CTable hover>
               <CTableHead>
                 <CTableRow color="primary">
                   <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
                   <CTableHeaderCell scope="col">Image</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Book Name</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Author</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Category</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">No Of Boooks</CTableHeaderCell>
-
-                  <CTableHeaderCell scope="col">Edit</CTableHeaderCell>
-                  <CTableHeaderCell scope="col">Delete</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">Resource Name</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">UserName</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">UserEmail</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">From</CTableHeaderCell>
+                  <CTableHeaderCell scope="col">To</CTableHeaderCell>
+                  
+                  <CTableHeaderCell scope="col">Accept</CTableHeaderCell>
                 </CTableRow>
               </CTableHead>
               {books.map((element) => {
-                const { title, author, category, noofbook, id, image } =
-                  element;
+                const { title, image, userEmail, userName, from, to, id } = element;
                 return (
                   <CTableBody>
                     <CTableRow key={id}>
@@ -114,28 +93,21 @@ const Books = () => {
                         />
                       </CTableDataCell>
                       <CTableDataCell>{title}</CTableDataCell>
-                      <CTableDataCell>{author}</CTableDataCell>
-                      <CTableDataCell>{category}</CTableDataCell>
-                      <CTableDataCell>{noofbook}</CTableDataCell>
+                      <CTableDataCell>{userName}</CTableDataCell>
+                      <CTableDataCell>{userEmail}</CTableDataCell>
+                      <CTableDataCell>{from}</CTableDataCell>
+                      <CTableDataCell>{to}</CTableDataCell>
 
-                      <CTableDataCell>
-                        <CButton
-                          onClick={() => {
-                            handleEdit(title);
-                          }}
-                          color="success"
-                        >
-                          Edit
-                        </CButton>
-                      </CTableDataCell>
+                     
+                     
                       <CTableDataCell>
                         <CButton
                           onClick={(e) => {
                             handleDelete(id);
                           }}
-                          color="danger"
+                          color="success"
                         >
-                          Delete
+                          Accept
                         </CButton>
                       </CTableDataCell>
                     </CTableRow>
@@ -150,4 +122,4 @@ const Books = () => {
   );
 };
 
-export default Books;
+export default IssuedResource;

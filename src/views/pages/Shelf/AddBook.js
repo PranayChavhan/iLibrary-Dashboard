@@ -10,9 +10,8 @@ import {
   CFormSelect,
   CButton,
 } from "@coreui/react";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 import axios from "axios";
-
 
 const AddBook = () => {
   const apiKey = process.env.REACT_APP_NEWS_API;
@@ -22,13 +21,13 @@ const AddBook = () => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [noofbook, setNoofbook] = useState("");
-  
+
   const [bookImg, setBookImg] = useState("");
 
   const baseURL = `${apiKey}/api/add`;
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const formData = new FormData();
     formData.append("title", title);
@@ -38,28 +37,23 @@ const AddBook = () => {
     formData.append("noofbook", noofbook);
     formData.append("image", bookImg);
 
-    console.log('====================================');
+    console.log("====================================");
     console.log(formData);
-    console.log('====================================');
-  
+    console.log("====================================");
+
     axios
       .post(baseURL, formData)
       .then((res) => {
-
         swal({
           title: "Good job!",
           text: "Book added successfully",
           icon: "success",
           button: {
-            text:"Done",
+            text: "Done",
           },
-        })
-
+        });
       })
       .catch((err) => alert("File Upload Error"));
-  
-
-    
 
     // setTitle("");
     // setAuthor("");
@@ -95,10 +89,10 @@ const AddBook = () => {
                   Author
                 </CFormLabel>
                 <CFormInput
-                value={author}
-                onChange={(e) => {
-                  setAuthor(e.target.value);
-                }}
+                  value={author}
+                  onChange={(e) => {
+                    setAuthor(e.target.value);
+                  }}
                   type="text"
                   id="exampleFormControlInput1"
                   placeholder="Author name"
@@ -110,40 +104,32 @@ const AddBook = () => {
                   Description
                 </CFormLabel>
                 <CFormTextarea
-                value={description}
-                onChange={(e) => {
-                  setDescription(e.target.value);
-                }}
+                  value={description}
+                  onChange={(e) => {
+                    setDescription(e.target.value);
+                  }}
                   id="exampleFormControlTextarea1"
                   rows="3"
                 ></CFormTextarea>
               </div>
               <div>
                 <CFormSelect
-                value={category}
-                onChange={((e)=>{setCategory(e.target.value)})}
-                aria-label="Default select example">
+                  value={category}
+                  onChange={(e) => {
+                    setCategory(e.target.value);
+                  }}
+                  aria-label="Default select example"
+                >
                   <option>Categories of Book</option>
-                  <option value="Operating System" >Operating System</option>
-                  <option value="Java Programming" >Java Programming</option>
-                  <option value="c/c++ Programming" >c/c++ Programming</option>
-                  <option value="Python Programming" >Python Programming</option>
-                  <option value="Object Oriented Programming" >Object Oriented Programming</option>
-                  <option value="Software Testing" >Software Testing</option>
-                  <option value="Data Structure" >Data Structure</option>
-                  <option value="Engineering Graphics" >Engineering Graphics</option>
-                  <option value="Networking" >Networking</option>
-                  <option value="RDBMS" >RDBMS</option>
-                  <option value="Computer Security" >Computer Security</option>
-                  <option value="Web Development" >Web Development</option>
-                  <option value="Electronics" >Electronics</option>
-                  <option value="Mechanics" >Mechanics</option>
-                  <option value="Chemistry" >Chemistry</option>
-                  <option value="Mathematics" >Mathematics</option>
-                  <option value="First Year" >First Year</option>
-                  <option value="Second Year" >Second Year</option>
-                  <option value="Third Year" >Third Year</option>
-                  
+                  <option value="Operating System">Operating System</option>
+                  <option value="Java Programming">Java Programming</option>
+                  <option value="c/c++ Programming">c/c++ Programming</option>
+                  <option value="Python Programming">Python Programming</option>
+                  <option value="Data Structure">Data Structure</option>
+                  <option value="Networking">Networking</option>
+                  <option value="RDBMS">RDBMS</option>
+                  <option value="Computer Security">Computer Security</option>
+                  <option value="Web Development">Web Development</option>
                 </CFormSelect>
               </div>
               <div className="mb-3 mt-3">
@@ -151,10 +137,10 @@ const AddBook = () => {
                   No of Books
                 </CFormLabel>
                 <CFormInput
-                value={noofbook}
-                onChange={(e) => {
-                  setNoofbook(e.target.value);
-                }}
+                  value={noofbook}
+                  onChange={(e) => {
+                    setNoofbook(e.target.value);
+                  }}
                   type="text"
                   id="exampleFormControlInput1"
                   placeholder="Numbers of books"
@@ -162,11 +148,13 @@ const AddBook = () => {
               </div>
               <div className="mb-3">
                 <CFormLabel htmlFor="formFile">Book Image</CFormLabel>
-                <CFormInput 
-                onChange={(e) => {
-                  setBookImg(e.target.files[0]);
-                }}
-                type="file" id="formFile" />
+                <CFormInput
+                  onChange={(e) => {
+                    setBookImg(e.target.files[0]);
+                  }}
+                  type="file"
+                  id="formFile"
+                />
               </div>
               <CButton type="submit" color="success">
                 Submit

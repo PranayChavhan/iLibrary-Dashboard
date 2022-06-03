@@ -53,7 +53,7 @@ const AddUser = () => {
 
     swal({
       title: "Good job!",
-      text: "Book added successfully",
+      text: "Student added successfully",
       icon: "success",
       button: {
         text: "Done",

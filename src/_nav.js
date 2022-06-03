@@ -127,6 +127,15 @@ const _nav = [
   },
   {
     component: CNavItem,
+    name: "Isssued Resources",
+    to: "/issued-resources",
+    icon: <CIcon icon={cilSchool} customClassName="nav-icon" />,
+    badge: {
+      color: "info",
+    },
+  },
+  {
+    component: CNavItem,
     name: "Add Resources",
     to: "/add-resources",
     icon: <CIcon icon={cilAddressBook} customClassName="nav-icon" />,

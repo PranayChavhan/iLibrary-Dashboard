@@ -1,4 +1,5 @@
 import React from "react";
+import IssuedResource from "./views/pages/Resource/IssuedResource";
 import Demo from "./views/pages/Students/demo";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
@@ -58,8 +59,9 @@ const routes = [
   { path: "/add-resources", name: "AddTeacher", component: AddResource },
   { path: "/total-ebooks", name: "Addebook", component: Totalebook },
   { path: "/add-ebook", name: "Addebook", component: Addebook },
-  { path: "/:name", name: "Editbook", component: EditBook },
+  { path: "edit/:name", name: "Editbook", component: EditBook },
   { path: "/demo", name: "Demo", component: Demo },
+  { path: "/issued-resources", name: "IssuedResource", component: IssuedResource },
 
 
 ];

@@ -20,7 +20,6 @@ import {
 const Demo = () => {
   const apiKey = process.env.REACT_APP_NEWS_API;
 
-
   // on change states
   const [excelFile, setExcelFile] = useState(null);
   const [excelFileError, setExcelFileError] = useState(null);
@@ -152,7 +151,7 @@ const Demo = () => {
     Year,
     Password,
     UploadImage
-  )=> {
+  ) => {
     const article = {
       name: StudentName,
       enrollment: EnrollmentNo,
@@ -168,14 +167,13 @@ const Demo = () => {
     const formData = new FormData();
     formData.append("name", StudentName);
     formData.append("enrollment", EnrollmentNo);
-    formData.append("email",Email);
-    formData.append("password",Password);
+    formData.append("email", Email);
+    formData.append("password", Password);
     formData.append("contact", Contact);
     formData.append("address", Address);
     formData.append("department", Department);
     formData.append("year", Year);
     formData.append("userImg", UploadImage);
-
 
     console.log("====================================");
     console.log(article);
@@ -185,7 +183,7 @@ const Demo = () => {
       .then((res) => {
         swal({
           title: "Good job!",
-          text: "Book added to wishlist successfully",
+          text: "User Added Successfully",
           icon: "success",
           button: {
             text: "Done",
@@ -193,7 +191,7 @@ const Demo = () => {
         });
       })
       .catch((err) => alert(err));
-  }
+  };
 
   return (
     <div>
@@ -230,9 +228,9 @@ const Demo = () => {
                         Department
                       </CTableHeaderCell>
                       <CTableHeaderCell scope="col">Year</CTableHeaderCell>
-                      <CTableHeaderCell scope="col">View</CTableHeaderCell>
-                      <CTableHeaderCell scope="col">Edit</CTableHeaderCell>
+        
                       <CTableHeaderCell scope="col">Delete</CTableHeaderCell>
+                      <CTableHeaderCell scope="col">Register</CTableHeaderCell>
                     </CTableRow>
                   </CTableHead>
 
@@ -263,14 +261,7 @@ const Demo = () => {
                           <CTableDataCell>{Address}</CTableDataCell>
                           <CTableDataCell>{Department}</CTableDataCell>
                           <CTableDataCell>{Year}</CTableDataCell>
-                          <CTableDataCell>
-                            <CButton color="primary" disabled>
-                              View
-                            </CButton>
-                          </CTableDataCell>
-                          <CTableDataCell>
-                            <CButton color="success">Edit</CButton>
-                          </CTableDataCell>
+                         
                           <CTableDataCell>
                             <CButton color="danger">Delete</CButton>
                           </CTableDataCell>

@@ -30,34 +30,31 @@ const TotalResource = () => {
   };
 
   useEffect(() => {
-    
     loadStudent();
   }, []);
 
-
-  const handleDelete = (id) =>{
-    console.log('====================================');
+  const handleDelete = (id) => {
+    console.log("====================================");
     console.log(id);
-    console.log('====================================');
-    
-    axios
-    .delete(`${apiKey}/api/resources/${id}`)
-    .then(function() {
-      swal({
-        title: "Good job!",
-        text: "Book deleted successfully",
-        icon: "success",
-        button: {
-          text:"Ok",
-        },
-      });
-      loadStudent();
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
+    console.log("====================================");
 
+    axios
+      .delete(`${apiKey}/api/resources/${id}`)
+      .then(function () {
+        swal({
+          title: "Good job!",
+          text: "Book deleted successfully",
+          icon: "success",
+          button: {
+            text: "Ok",
+          },
+        });
+        loadStudent();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   return (
     <div>
@@ -77,8 +74,7 @@ const TotalResource = () => {
                 </CTableRow>
               </CTableHead>
               {books.map((element) => {
-                const { title, id, description, image } =
-                  element;
+                const { title, id, description, image } = element;
                 return (
                   <CTableBody>
                     <CTableRow key={id}>
@@ -87,13 +83,16 @@ const TotalResource = () => {
                         <img
                           src={image}
                           width="70"
-                          style={{ border: "1px solid gray", borderRadius: "5px" }}
+                          style={{
+                            border: "1px solid gray",
+                            borderRadius: "5px",
+                          }}
                           alt="bopok-image"
                         />
                       </CTableDataCell>
                       <CTableDataCell>{title}</CTableDataCell>
                       <CTableDataCell>{description}</CTableDataCell>
-                      
+
                       <CTableDataCell>
                         <CButton color="primary" disabled>
                           View
@@ -103,7 +102,14 @@ const TotalResource = () => {
                         <CButton color="success">Edit</CButton>
                       </CTableDataCell>
                       <CTableDataCell>
-                        <CButton onClick={((e)=>{handleDelete(id)})} color="danger">Delete</CButton>
+                        <CButton
+                          onClick={(e) => {
+                            handleDelete(id);
+                          }}
+                          color="danger"
+                        >
+                          Delete
+                        </CButton>
                       </CTableDataCell>
                     </CTableRow>
                   </CTableBody>
@@ -115,6 +121,6 @@ const TotalResource = () => {
       </CRow>
     </div>
   );
-}
+};
 
-export default TotalResource
+export default TotalResource;

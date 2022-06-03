@@ -87,7 +87,7 @@ const Totalebook = () => {
                 </CTableRow>
               </CTableHead>
               {books.map((element) => {
-                const { title, author, category, size, pages, id, image } =
+                const { title, author, category, size, pages, id, image, bookimg } =
                   element;
                 return (
                   <CTableBody>
@@ -96,12 +96,7 @@ const Totalebook = () => {
 
                       <CTableDataCell>
                         <div>
-                          <embed
-                            src={image}
-                            width="100"
-                            height="120"
-                            type="application/pdf"
-                          />
+                          <img src={`${apiKey}${bookimg}`} width="100"  alt="" />
                         </div>
                       </CTableDataCell>
                       <CTableDataCell>{title}</CTableDataCell>
